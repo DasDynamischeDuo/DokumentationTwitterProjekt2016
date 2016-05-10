@@ -1,0 +1,6 @@
+\select@language {german}
+\contentsline {section}{\numberline {1}Funktionsweise und Beschreibung}{3}{section.1}
+\contentsline {section}{\numberline {2}Steganographie}{4}{section.2}
+\contentsline {section}{\numberline {3}Entwicklungshergang}{5}{section.3}
+\contentsline {section}{\numberline {4}Reflexion}{6}{section.4}
+\contentsline {section}{Stichwortverzeichnis}{7}{section.4}
