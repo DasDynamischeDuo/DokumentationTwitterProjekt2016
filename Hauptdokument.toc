@@ -1,6 +1,12 @@
 \select@language {german}
 \contentsline {section}{\numberline {1}Funktionsweise und Beschreibung}{3}{section.1}
-\contentsline {section}{\numberline {2}Steganographie}{4}{section.2}
-\contentsline {section}{\numberline {3}Entwicklungshergang}{5}{section.3}
-\contentsline {section}{\numberline {4}Reflexion}{6}{section.4}
-\contentsline {section}{Stichwortverzeichnis}{7}{section.4}
+\contentsline {subsection}{\numberline {1.1}Beschreibung}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Funktionsweise}{3}{subsection.1.2}
+\contentsline {subsubsection}{\numberline {1.2.1}Nachrichten in Bildern verstecken}{3}{subsubsection.1.2.1}
+\contentsline {subsubsection}{\numberline {1.2.2}Nachrichten aus Bildern filtern}{4}{subsubsection.1.2.2}
+\contentsline {subsubsection}{\numberline {1.2.3}Der Login}{4}{subsubsection.1.2.3}
+\contentsline {subsubsection}{\numberline {1.2.4}Ein Bild Twittern}{4}{subsubsection.1.2.4}
+\contentsline {section}{\numberline {2}Steganographie}{5}{section.2}
+\contentsline {section}{\numberline {3}Entwicklungshergang}{6}{section.3}
+\contentsline {section}{\numberline {4}Reflexion}{7}{section.4}
+\contentsline {section}{Stichwortverzeichnis}{8}{section.4}
