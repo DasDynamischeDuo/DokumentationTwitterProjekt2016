@@ -43,12 +43,15 @@ Um eine Nachricht aus einem Bild zu filtern muss das Bild ausgewählt werden. Hi
 Um auf Twitter zugreifen zu können muss man sich ersteinmal anmelden. Hierfür benötigt man den AccesToken, das AccesTokenSecret, den ConsumerKey sowie das ConsumerSecret. Diese vier Schlüsselbekommt man von Twitter. Man meldet sich hier: \url{https://apps.twitter.com/} mit seinem Twitter-Account an und folgt den Instruktionen. Sobald man seine Schlüssel hat wählt man in dem Menu Login(6) den Unterpunkt Neuer Login aus. Hier gibt man seine eben erworbenen Schlüssel sowie einen Speichername für diesen Login ein.
 Ab sofort kann man auch die Twitterfunktionen der TwitterStego-App nutzen.
 
+\subsubsection{Gespeicherte Logins}
+Wenn man die vier Schlüssel eingibt muss man auch einen Namen eingeben. Mithilfe dieser Daten wird ein File erstellt welches nach schließen des Programms wieder aufgerufen werden kann. Dies wird mithilfe des Menüpunktes Login laden im Menü Login(6) bewerkstelligt. Somit muss man die Keys nicht wiederholt eingeben.
+
 
 \subsubsection{Ein Bild Twittern}
 Um ein Bild zu Twittern muss man nur einen beliebigen (optimal einen wenig oder nur eigen benutzten) Hashtag in das vorgesehene Feld(7) eintragen. Sobald der Button Bild-Twittern(8) betätigt wurde öffnet sich der Dateiexplorer und man kann das gewünschte Bild auswählen. 
 
 \subsubsection{Ein Bild von Twitter suchen}
-
+Um ein Bild von Twitter herunterzuladen muss man den Accountname des Publishers sowie den zum Bild zugehörigen Hashtag eingeben. Sobald man den Button Suche betätigt(11) öffnet sich der Dateiexplorer und man wählt den Speicherort aus. Das Bild wird gespeichert und automatisch in der rechten Vorschau(5) angezeigt. 
 
 
 
@@ -64,30 +67,146 @@ Kryptographie\index{Krypto}
 
 \subsection{Zeitliches Limit}
 
-Da das Schulprojekt auf nur 3 Wochen begrenzt war mussten wir uns bei der Gestaltung der TwitterStego-App beschränken. 
-
-
-
-
+Da das Schulprojekt auf nur 3 Wochen begrenzt war mussten wir uns bei der Gestaltung der TwitterStego-App beschränken. Bei der Steganographie wird eine Nachricht versteckt aber mithilfe der Kryptographie eigentlich noch zusätzlich verschlüsselt. Aufgrund der kurzen Zeitspanne haben wir beschlossen diese Funktion auszulassen. Auch wollten wir zu Anfang weitere Twitter-Funktionen einfügen wie mehrere Bilder auf einmal zu suchen und diese in einer Datenbank zu speichern. Darin hätte man Teilnachrichten verstecken und diese dann mithilfe der TwitterSego-App zusammenfügen können. Trotzdem sind wir mit dem Ergebnis zufrieden da die Grundfunktionen gewährleistet sind.
 
 \subsection{Aufteilung der Aufgaben}
+
+Da wir zu zweit mithilfe von GitHub an dem gleichen Projekt arbeiten konnten war die Teilung der Aufgaben sehr einfach. Anfangs beschäftigte sich Herr Hubenschmidt mit dem Verstecken von Nachrichten in Bildern und Herr Zeller mit der Verbindung zu Twitter. Als diese großen Teilpunkte erfüllt waren verband Herr Hubenschmidt diese und Herr Zeller gestaltete die Grafische Oberfläche.
+
+\newpage
+\subsection{Codeausschnitte}
+
+\subsubsection{Steganographie Code}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+public BufferedImage hideText(String text, File img) throws IOException {
+
+		BufferedImage bufferedImage = ImageIO.read(img);
+		int w = bufferedImage.getWidth();
+		int h = bufferedImage.getHeight();
+
+
+		if (w*h -16 <= text.length() * 8) {
+			gui.error("Text ist zu lang");
+			return null;
+		}
+		
+		int stelle = 0;
+
+		int[] textBits = new int[text.length() + 8];
+		textBits = bitsInText(text);
+
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < w; j++) {
+				if (textBits.length <= stelle) {
+					break;
+				}
+
+				bufferedImage.setRGB(j, i, setLastBit(bufferedImage.getRGB(j, i), textBits[stelle]));
+				stelle++;
+
+			}
+		}
+
+		return bufferedImage;
+
+	}
+
+
+\end{lstlisting}
+
+\underline{\textbf{Beschreibung:}}\\
+Diese Methode versteckt eine Nachricht in einem Bild.\\
+
+\newpage
+\subsubsection{Twitter Code}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+public String getTweetandMediafromHash(String hash, String user) {
+
+		String returnvalue = null;
+
+		try {
+			ResponseList<Status> timeline = twitter.getUserTimeline(twitter.showUser(user).getId());
+
+			for (Status status : timeline) {
+				for (HashtagEntity hashtags : status.getHashtagEntities()) {
+					if (hashtags.getText().equals(hash)) {
+						for (MediaEntity mediaEntity : status.getMediaEntities()) {
+							returnvalue = mediaEntity.getMediaURL();
+						}
+					}
+				}
+			}
+		} catch (IllegalStateException e) {
+
+			e.printStackTrace();
+		} catch (TwitterException e) {
+
+			e.printStackTrace();
+		}
+
+		return returnvalue;
+
+	}
+\end{lstlisting}
+
+\underline{\textbf{Beschreibung:}}\\
+Diese Methode sucht auf Twitter nach einem Bild.\\
+
+\newpage
+\subsubsection{Gui Code}
+
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+protected void btLoadLoginClicked() {
+			
+			String url = LoginData.class.getResource("").toString();
+			url = url.substring(5, url.length());
+			url = url.replace("Twitter/", "") + "LoginData/";
+			File folder = new File(url);
+			File[] listOfFiles = folder.listFiles();
+			Vector<String> fileNames = new Vector<String>();
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains(".bin")) {
+					fileNames.add(listOfFiles[i].getName().replace(".bin", ""));
+				}
+			}
+			String[] fileNamesArray = fileNames.toArray(new String[0]);
+			String fileName = (String) JOptionPane.showInputDialog(null, "Auswahl", "Auswahl",
+					JOptionPane.QUESTION_MESSAGE, null, fileNamesArray, fileNamesArray[0]);
+			url = url + fileName + ".bin";
+			try {
+				loginData = loginData.loadLoginData(url);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+
+			}
+			twitterLogin.setLoginData(loginData);
+			twitterLogin.reConfiguration();
+			loginDatenGesetzt = twitterLogin.checkLogin();
+	
+	}
+
+\end{lstlisting}
+
+\underline{\textbf{Beschreibung:}}\\
+Diese Methode wird aufgerufen wenn ein bestimmter Button betätigt ist.\\
 
 
 \newpage
 \section{Reflexion}
 
+Durch schon vorherige zusammenarbeitet fiel uns diese Projekt nicht allzu schwer. Es war etwas Einarbeitungszeit in bestimmte Themen wie die Twitter4J Bibliothek oder die Steganographie nötig aber keine allzu großen Hürden. Mit dem Resultat sind wir beide zufrieden. Es gab nie oder keine Unstimmigkeiten und Probleme wurden schnell diskutiert und behoben. Alles in allem ein gelungenes 3 Wochen Projekt an dem wir viel Spaß hatten
 
 
 
 
-%Stichwortverzeichniss
-\newpage
-\renewcommand{\indexname}{Stichwortverzeichnis}
-
-% Stichwortverzeichnis Im Inhaltsverzeichniss
-\addcontentsline{toc}{section}{Stichwortverzeichnis}
-
-% Stichwortverzeichnis anzeigen
-\printindex
 
 \end{document}

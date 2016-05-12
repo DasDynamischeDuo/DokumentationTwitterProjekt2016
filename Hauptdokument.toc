@@ -5,8 +5,15 @@
 \contentsline {subsubsection}{\numberline {1.2.1}Nachrichten in Bildern verstecken}{3}{subsubsection.1.2.1}
 \contentsline {subsubsection}{\numberline {1.2.2}Nachrichten aus Bildern filtern}{4}{subsubsection.1.2.2}
 \contentsline {subsubsection}{\numberline {1.2.3}Der Login}{4}{subsubsection.1.2.3}
-\contentsline {subsubsection}{\numberline {1.2.4}Ein Bild Twittern}{4}{subsubsection.1.2.4}
+\contentsline {subsubsection}{\numberline {1.2.4}Gespeicherte Logins}{4}{subsubsection.1.2.4}
+\contentsline {subsubsection}{\numberline {1.2.5}Ein Bild Twittern}{4}{subsubsection.1.2.5}
+\contentsline {subsubsection}{\numberline {1.2.6}Ein Bild von Twitter suchen}{4}{subsubsection.1.2.6}
 \contentsline {section}{\numberline {2}Steganographie}{5}{section.2}
 \contentsline {section}{\numberline {3}Entwicklungshergang}{6}{section.3}
-\contentsline {section}{\numberline {4}Reflexion}{7}{section.4}
-\contentsline {section}{Stichwortverzeichnis}{8}{section.4}
+\contentsline {subsection}{\numberline {3.1}Zeitliches Limit}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Aufteilung der Aufgaben}{6}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Codeausschnitte}{7}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Steganographie Code}{7}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Twitter Code}{8}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Gui Code}{9}{subsubsection.3.3.3}
+\contentsline {section}{\numberline {4}Reflexion}{10}{section.4}
