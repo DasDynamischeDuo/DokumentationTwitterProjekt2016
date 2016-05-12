@@ -38,20 +38,20 @@
 
 %Kopf und Fusszeilen
 \usepackage{fancyhdr}
-\pagestyle{fancy} %vordefinierter Style
+\pagestyle{fancy} 								%vordefinierter Style
 \fancyhf{}
 %Kopfzeile
-\fancyhead[L]{\nouppercase{\leftmark}}
-\fancyhead[C]{TG 13/3 Projektdokumentation}
-\fancyhead[R]{\today}
-\renewcommand{\headrulewidth}{0.5pt}
-\headheight 15pt
+\fancyhead[L]{\nouppercase{\leftmark}}			%Oben Links Kapitel und Kapitelnummer
+\fancyhead[C]{TG 13/3 Projektdokumentation}		%Oben Mitte
+\fancyhead[R]{\today}							%Oben Rechts Datum
+\renewcommand{\headrulewidth}{0.5pt}			%Strich oben
+\headheight 15pt								%Abstand zum Seitenanfang
 %Fusszeile
-\fancyfoot[L]{Fabian Zeller }
-\fancyfoot[C]{\thepage}
-\fancyfoot[R]{Emanuel Hubenschmidt}
-\renewcommand{\footrulewidth}{0.0pt}
-\footskip 63pt
+\fancyfoot[L]{Fabian Zeller }					%Unten Links
+\fancyfoot[C]{\thepage}							%Unten Mitte Seitenzahl
+\fancyfoot[R]{Emanuel Hubenschmidt}				%Unten Rechts
+\renewcommand{\footrulewidth}{0.0pt}			%Strich unten
+\footskip 63pt									%Abstand zum Seitenende
 
 %Tabellen
 
@@ -102,6 +102,6 @@
   stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
   stringstyle=\color{mymauve},     % string literal style
   tabsize=2,	                   % sets default tabsize to 2 spaces
-  title=Codeausschnitt                 % show the filename of files included with \lstinputlisting; also try caption instead of title
+  title=Codeausschnitt             % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
