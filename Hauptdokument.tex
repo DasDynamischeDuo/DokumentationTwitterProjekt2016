@@ -57,9 +57,9 @@ Um ein Bild von Twitter herunterzuladen muss man den Accountname des Publishers 
 
 \newpage
 \section{Steganographie}
-
-Kryptographie\index{Krypto}
-
+Die Steganographie ist ein Unterkapitel der Kryptographie. Ihr Ziel ist es Nachrichten in einem andern Medium zu speichern. Der begriff leitet sich aus dem griechischen ab und bedeutet ''bedeckt schreiben´´. Erstmals wurde diese verfahren um 400 v.Chr. verwendet, indem man z.B. Nachrichten auf die Innenseite von Wachstafeln ritzte und dort drüber dann Wachs goss.\\
+Heutzutage wird die Steganographie hauptsächlich in digitalen Median verwendet. Hierzu bieten sich besonders Bilder oder Audiodateien an. Ein digitales Bild, z.B. eine png-Datei, besteht aus einer Matrix von Werten. Jeder Wert stellt einen Pixel da, welcher sich wiederum aus 4 Werten zusammensetzt, nämlich dem rot, grün, blau und Alpha Wert. Diese sind jeweils 8 Bit lang, somit ergibt sich eine 32-Bit lange Zahl. Um nun eine Nachricht darin verstecken zu können, muss man diese Werte so manipulieren, dass ohne das Original, die Manipulation nicht auffällt. Dazu wird die Nachricht zuerst in eine binäre Darstellungsform (z.B. binärer ASCII-Code) gebracht. Anschließend werden die Last Significant Bit einer Farbe durch die Bits der Nachricht ersetzt. Der Alpha-Wert ist hierfür nicht geeignet, denn er gibt die Transparenz eines Pixels an. Mit dem bloßen Auge wäre zwar trotzdem kein Unterschied zu erkennen, allerdings ist der Alpha Wert normalerweise für jeden Pixel auf 255 (nicht Transparent), wodurch eine Manipulation auffallen würde.\\
+In unserm Programm gibt eine Bitfolge von 8 Einsern in den ersten 8 Pixeln eines Bildes an, das sich in dem Bild eine Nachricht versteckt. Das Programm liest dann solange alle LSBs der Pixel, bis es auf zuerst 8 Nullen und dann auf 16 Einsen trifft. Dies bedeutet, dass die Nachricht zu ende ist. Die 8 Nullen sind dazu da, damit nicht die Einser, die zu einer Nachricht gehören als Einser dieser Schluss Bitfolge gezählt werden. Zum Beispiel ist ein Fragezeichen in binären ASCII Code eine 0011 1111. Wenn direkt darauf die 16 Einser folgen würden nur die zwei Nullen zur Nachricht zählen und den Rest als Schluss Signal.
 
 
 \newpage
